@@ -34,8 +34,28 @@ const createProduct = async (name, quantity) => {
   };
 };
 
+const updateProduct = async (name, quantity, id) => {
+  const findProductExists = await productsModel.getAll()
+  .then((products) => products.find((product) => product.id === parseInt(id, 10)));
+  if (!findProductExists) {
+    const err = { status: 404, message: 'Product not found' };
+    throw err;
+  }
+  const updatedProduct = async () => {
+    const result = await productsModel.updateProduct(name, quantity, id);
+    return result;
+  };
+  updatedProduct();
+  return {
+    id,
+    name,
+    quantity,
+  };
+};  
+
 module.exports = {
     getAll,
     findProductById,
     createProduct,
+    updateProduct,
 };
