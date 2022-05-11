@@ -51,6 +51,7 @@ const deleteProduct = async (req, res, next) => {
       await productsService.deleteProduct(id);
     };
     await deletedProduct();
+    
     return res.status(204).send();
   } catch (err) {
     next(err);
