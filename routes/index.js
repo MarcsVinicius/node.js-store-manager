@@ -11,6 +11,7 @@ router.post('/products', verifyBody.nameValidate,
  verifyBody.quantityValidate, productsController.createProduct);
 router.put('/products/:id', verifyBody.nameValidate,
  verifyBody.quantityValidate, productsController.updateProduct);
+router.delete('/products/:id', productsController.deleteProduct);
 router.get('/sales', salesController.getAll);
 router.get('/sales/:id', salesController.findSalesById);
 
