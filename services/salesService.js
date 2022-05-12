@@ -32,8 +32,28 @@ const addSales = async (sales) => {
     };
 };
 
+const updateSales = async (sales, saleToUpdate) => {
+    console.log(saleToUpdate);
+    await sales.forEach(async (sale) => {
+        const { productId, quantity } = sale;
+        if (quantity >= 1) {
+        const result = await salesModel.updateSales(productId, quantity, saleToUpdate);
+
+        return result;
+        } 
+            const err = { message: 'quantity must be greater than zero' };
+            throw err;
+    });
+
+    return {
+        saleId: saleToUpdate,
+        itemUpdated: sales,
+    };
+};
+
 module.exports = {
     getAll,
     findSalesById,
     addSales,
+    updateSales,
 };
