@@ -4,7 +4,7 @@ const salesController = require('../controllers/salesController');
 const verifyBody = require('../middlewares/verifyBody');
 
 const router = express.Router();
-
+// Products
 router.get('/products', productsController.getAll);
 router.get('/products/:id', productsController.findProductById);
 router.post('/products', verifyBody.nameValidate,
@@ -12,7 +12,9 @@ router.post('/products', verifyBody.nameValidate,
 router.put('/products/:id', verifyBody.nameValidate,
  verifyBody.quantityValidate, productsController.updateProduct);
 router.delete('/products/:id', productsController.deleteProduct);
+// Sales
 router.get('/sales', salesController.getAll);
 router.get('/sales/:id', salesController.findSalesById);
+router.post('/sales', salesController.addSales);
 
 module.exports = router;

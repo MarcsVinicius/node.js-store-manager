@@ -17,7 +17,23 @@ const findSalesById = async (salesId) => {
     return result;
 };
 
+const addSales = async (sales) => {
+    const saleDate = await salesModel.addSaleDate();
+    const { insertId } = saleDate;
+    sales.forEach(async (sale) => {
+        const { productId, quantity } = sale;
+        const result = await salesModel.addSales(productId, quantity, insertId);
+
+        return result;
+    });
+    return {
+        id: insertId,
+        itemsSold: sales,
+    };
+};
+
 module.exports = {
     getAll,
     findSalesById,
+    addSales,
 };
