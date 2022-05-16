@@ -18,9 +18,9 @@ const findProductById = async (productId) => {
 };
 
 const createProduct = async (name, quantity) => {
-  const allProducts = await productsModel.getAll()
-  .then((products) => products.some((product) => product.name === name));
-  if (allProducts) {
+  const allProducts = await productsModel.getAll();
+  const verifyAlreadyExists = allProducts.some((product) => product.name === name);
+  if (verifyAlreadyExists) {
     const err = { status: 409, message: 'Product already exists' };
     throw err;
   }
